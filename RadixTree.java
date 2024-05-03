@@ -1,4 +1,3 @@
-package tree;
 
 import java.util.List; 
 import java.util.ArrayList; 
@@ -9,10 +8,18 @@ import java.util.*;
 class RadixTreeNode{
 	private Map<Character, RadixTreeNode> children;
 	private boolean isLeaf;
+	private String label;
 
 	public RadixTreeNode(){
+		this.label="";
 		this.children = new HashMap<>();
 		this.isLeaf = false;
+	}
+	public String label(){
+		return label;
+	}
+	public void setLabel(String label){
+		this.label = label;
 	}
 	public Map<Character, RadixTreeNode> getChildren(){
 		return children;
@@ -21,7 +28,7 @@ class RadixTreeNode{
 		return isLeaf;
 	}
 	public void setLeaf(boolean leaf){
-		isLeaf= leaf;
+		isLeaf = leaf;
 	}
 }
 
@@ -29,7 +36,8 @@ public class RadixTree{
 	private RadixTreeNode root;
 
 	public RadixTree(){
-		this.root = new RadixTreeNode();
+		//initialized with empty label
+		root = new RadixTreeNode();
 	}
 	public RadixTreeNode getRoot(){
 		return root;
@@ -87,8 +95,9 @@ public class RadixTree{
 
 			//merge current node with child
 			String newLabel = prefix + cLabel;
-			node.getChildren().clear();
-			node.getChildren().put(newLabel.charAt(0), childNode); //update parents children with merged node
+			childNode.setLabel(newLabel); //update label of current node
+			//node.setLeaf(childNode.isLeaf()); //update leaf status
+			//node.getChildren().clear(); //clear current nodes children
 
 			//recursively compress child node
 			compress(childNode, newLabel);
@@ -100,22 +109,51 @@ public class RadixTree{
 			}
 		}
 	}
-	//make prefix method for suggestions
+	public List<String> suggestWords(String prefix){
+		List<String> suggestions = new ArrayList<>();
+		RadixTreeNode prefixNode = findPrefixNode(prefix);
+
+		if(prefixNode != null){
+			collect(prefixNode, prefix, suggestions);
+		}
+		return suggestions;
+	}
+	private RadixTreeNode findPrefixNode(String prefix){
+		RadixTreeNode current = root;
+		for(int i=0; i<prefix.length(); i++){
+			char ch = prefix.charAt(i);
+			Map<Character, RadixTreeNode> children = current.getChildren();
+			if(!children.containsKey(ch)){
+				return null; //prefix not found 
+			}
+			current = children.get(ch);
+		}
+		return current;
+	}
+	private void collect(RadixTreeNode node, String prefix, List<String> suggestions){
+		if(node.isLeaf()){
+			suggestions.add(prefix); //add prefix if it represents complete word
+		}
+		for(Map.Entry<Character, RadixTreeNode> entry : node.getChildren().entrySet()){
+			collect(entry.getValue(), prefix + entry.getKey(), suggestions);
+		}
+	}
 
 
 	
 	public static void main(String[] args){
 		RadixTree trie = new RadixTree();
 
-		trie.insert("hello");
-		trie.insert("bye");
-		trie.insert("apple");
-		trie.insert("banana");
-		trie.insert("app");
-		trie.insert("bat");
+		trie.insert("romane");
+		trie.insert("romanus");
+		trie.insert("romulus");
+		trie.insert("rubens");
+		trie.insert("ruber");
+		trie.insert("rubicon");
+		trie.insert("rubicundus");
 
-		System.out.println("Search for 'apple': " + trie.search("apple")); // true
-		System.out.println("Search for 'bye': " + trie.search("bye")); // true
+		System.out.println("Search for 'rubens': " + trie.search("rubens")); // true
+		System.out.println("Search for 'rubicon': " + trie.search("rubicon")); // true
 		System.out.println("Search for 'bruh': " + trie.search("bruh")); // false
 
 		//structure before compression
@@ -128,6 +166,9 @@ public class RadixTree{
 		System.out.println("\nTree after compression:");
 		printTree(trie.getRoot(), "");
 
+		testSuggestions(trie, "rom");
+		testSuggestions(trie, "rub");
+
 	}
 	private static void printTree(RadixTreeNode node, String prefix){
 		if(node == null){
@@ -139,6 +180,15 @@ public class RadixTree{
 		for(Map.Entry<Character, RadixTreeNode> entry : node.getChildren().entrySet()){
 			printTree(entry.getValue(), prefix + entry.getKey());
 		}
+	}
+	private static void testSuggestions(RadixTree trie, String prefix){
+		System.out.println("Suggestions for prefix '" + prefix + "':");
+		List<String> suggestions = trie.suggestWords(prefix);
+		for(String suggestion : suggestions){
+			System.out.println(suggestion);
+		}
+		System.out.println();
+
 	}
 
 
