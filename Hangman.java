@@ -1,4 +1,6 @@
+// Hangman file
 public class Hangman{
+
 
 	int numLetters;
 	int difficulty;
