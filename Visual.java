@@ -5,23 +5,28 @@ public class Visual{
 
 //having something so that when you initalize the game you can see the pole, eerything but the man
 	public static void main(String[] args){
-	System.out.println("Let's begin!");
-	System.out.println("You have five guesses to guess the words, your guessed letterrs will be dispalyed.  Good luck!");
-			System.out.println("	___________");
-			System.out.println("	|			|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("	|");
-			System.out.println("____|____");
-			System.out.println();
-			//System.out.println("You have" + numGuess + "remaining!")
+	System.out.println("Want to play? (yes/no");
+	//String response = scanner.nextLine();
+	//if(response.equalsIgnoreCase("yes")){
+		System.out.println("You have five guesses to guess the words, your guessed letterrs will be dispalyed.  Good luck!");
+		System.out.println("Guess a letter:");
+		//game logic method calls
+				System.out.println("	___________");
+				System.out.println("	|			|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("	|");
+				System.out.println("____|____");
+				System.out.println();
+				//System.out.println("You have" + numGuess + "remaining!")
+		//}
 	}
 
 	public static void hangmanVisual(){
