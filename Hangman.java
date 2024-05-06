@@ -1,16 +1,20 @@
 // Hangman file
 public class Hangman{
 
-
 	int numLetters;
 	int difficulty;
+	int numIncorrectAttempts;
 	boolean gameOver;
+	Map<Word, Hint> wordTable;
+
 	
 	// Constructor
 	public Hangman(int numLetters, int difficulty){
 
 		this.numLetters = numLetters;
 		this.difficulty = difficulty;
+		this.numIncorrectAttempts = 0;
+		this.wordTable = new HashMap<>();
 		this.gameOver = false;
 	}
 
@@ -25,9 +29,7 @@ public class Hangman{
 		File file = new File(filePath);
 		Scanner scanner = new Scanner(file);
 	
-
 		boolean skipped = false;
-
 		while (scanner.hasNextLine()) {
 
 			String line = scanner.nextLine();
@@ -37,27 +39,17 @@ public class Hangman{
 				continue;
 			}
 		
-			// Use scanner to injest the student entries in the .txt files 
+			// Use scanner to injest the word entries in .txt file 
 			String[] parts = line.split(",");
-			System.out.println(parts[0]);
-			System.out.println(parts[1]);
-			System.out.println(parts[2]);
+			String word = parts[0];
+			String hint = parts[1];
 
-
-			String domainName = parts[0];
-			String iP = parts[1];
-			String timeVisited = parts[2];
-
-			Event event = new Event(iP, timeVisited);
-		
-
-			String key = domainName;
-
-			bst.put(key, event, new StringComparator());
+			radixTree.insert(word); // Assuming insert method for RadixTree is implemented 
+			wordTable.put(word, hint);
 		}
 		scanner.close();
 	}
-	
+
 	catch(FileNotFoundException e){
 		 System.err.println("File not found: " + e.getMessage());
 	}
@@ -65,9 +57,19 @@ public class Hangman{
 	}
 
 
+	public boolean checkGameOver(){
 
+		if(this.difficulty == 3){
+			return this.numIncorrectAttempts == 6;
+		}
+		if(this.difficulty == 2){
+			return this.numIncorrectAttempts == 8;
+		}
+		if(this.difficulty == 1){
+			return this.numIncorrectAttempts == 10;
+		}
 
-
+	}
 
 	
 
@@ -79,15 +81,11 @@ public class Hangman{
 
 	}
 
-	public boolean checkGameOver(){
-		return false;
+	public void offerHint(){
+		return wordTable.get(this.word);
 	}
 
-	public void addBodyPart(){
-
-	}
-
-
+	
 
 
 
