@@ -1,3 +1,4 @@
+package tree;
 
 import java.util.List; 
 import java.util.ArrayList; 
@@ -89,9 +90,11 @@ public class RadixTree{
 		}
 		//if node has only one child
 		if(node.getChildren().size() == 1){
+			//retrives first and only child from map, converts to entry in Map.Entry(a nexted interface)
+			//entrySet()- get key-value pair from entry, iterator()- access elements in Set next()- next element
 			Map.Entry<Character, RadixTreeNode> entry = node.getChildren().entrySet().iterator().next();
-			char cLabel = entry.getKey(); //child
-			RadixTreeNode childNode = entry.getValue();
+			char cLabel = entry.getKey(); //gets key from child node, reps edge label connecting current node to child
+			RadixTreeNode childNode = entry.getValue(); //get value of child node from entry
 
 			//merge current node with child
 			String newLabel = prefix + cLabel;
