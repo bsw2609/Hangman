@@ -1,11 +1,18 @@
 // Hangman file
 public class Hangman{
 
+	// Instance variables
 	int numLetters;
 	int difficulty;
 	int numIncorrectAttempts;
 	boolean gameOver;
 	Map<Word, Hint> wordTable;
+	ArrayList<String> words;
+
+	// Number of allowed incorrect guesses, given different difficulties
+	public final int EASY_MAX_NUM_INCORRECT = 10;
+	public final int MEDIUM_MAX_NUM_INCORRECT = 8;
+	public final int HARD_MAX_NUM_INCORRECT = 6;
 
 	
 	// Constructor
@@ -15,6 +22,7 @@ public class Hangman{
 		this.difficulty = difficulty;
 		this.numIncorrectAttempts = 0;
 		this.wordTable = new HashMap<>();
+		this.words = new ArrayList<>();
 		this.gameOver = false;
 	}
 
@@ -44,6 +52,8 @@ public class Hangman{
 			String word = parts[0];
 			String hint = parts[1];
 
+
+			words.add(word);
 			radixTree.insert(word); // Assuming insert method for RadixTree is implemented 
 			wordTable.put(word, hint);
 		}
@@ -75,16 +85,21 @@ public class Hangman{
 
 	public void generateNewWord(){
 
+		Random rand = new Random();
+		int randInd = rand.nextInt(words.size());
+		String randomWord = words.get(randInd);
+		return ;
 	}
+
+
+	public void offerHint(){
+		return wordTable.get(randomWord);
+	}
+
 
 	public void makeSuggestions(){
 
-	}
-
-	public void offerHint(){
-		return wordTable.get(this.word);
-	}
-
+		}
 	
 
 
