@@ -20,14 +20,22 @@ The player is prompted for their guess for one of the correct letters in the wor
 
 ## words.txt
 
-words.txt is a toy data set where each word is asscoiated with a category of some sort. This serves as the hint if users request one.
+words.txt is a toy data set where each word is asscoiated with a cross-word style description. This serves as the hint if users request one.
 
-tree,plant
-treat,food
-tread,verb
-treated,adjective
+Agriculture/Farming production
+Agribusiness/Commercial activities derived from farming
+Agronomy/Science of soil management
+Agrarian/Relating to land and its cultivation
+Agriculturalist/Expert in the science of farming and land management 
+Tree/Surrounds Williamstown
+Treat/Late-night snack
+Tread/____ carefully!
+Treated/Fixed by the healthcenter
+Tram/Would be nice to get to Albany
+Trade/Thoughtful exchange
+Troop/Military personnel
 
-Here we can see 4 words with common prefixes with the hints for each word seperated from that word with a comma.
+Here we can see several words with common prefixes with the hints for each word seperated from that word with a comma.
 
 
 

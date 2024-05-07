@@ -1,25 +1,40 @@
-// Hangman file
+package tree;
+
 public class Hangman{
 
 	// Instance variables
-	int numLetters;
-	int difficulty;
-	int numIncorrectAttempts;
-	boolean gameOver;
-	Map<Word, Hint> wordTable;
-	ArrayList<String> words;
+	int numLetters; // Length of word 
+	int difficulty; // Level of difficulty
+
+	int numIncorrectAttempts; // Number of current incorrect guesses
+	int maxIncorrectAtempts; // Number of allowed incorrect guesses
+	boolean gameOver; // Boolean to detrmine when game is over
+
+	String targetWord; // Target word that will be randomly generated
+	Map<String, String> wordTable; // Word table to hold words as keys and hints as values
+	ArrayList<String> words; // Array list to hold words also in Radix tree
 
 	// Number of allowed incorrect guesses, given different difficulties
-	public final int EASY_MAX_NUM_INCORRECT = 10;
+	public final int EASY_MAX_NUM_INCORRECT = 10; 
 	public final int MEDIUM_MAX_NUM_INCORRECT = 8;
 	public final int HARD_MAX_NUM_INCORRECT = 6;
 
 	
-	// Constructor
+	// Constructor Method
 	public Hangman(int numLetters, int difficulty){
 
 		this.numLetters = numLetters;
 		this.difficulty = difficulty;
+
+		if(difficulty == 1){
+			this.maxIncorrectAtempts = EASY_MAX_NUM_INCORRECT;
+		}
+		else if(difficulty == 2){
+			this.maxIncorrectAtempts = MEDIUM_MAX_NUM_INCORRECT;
+		}
+		else if(difficulty == 3){
+			this.maxIncorrectAtempts = MEDIUM_MAX_NUM_INCORRECT;
+		}
 		this.numIncorrectAttempts = 0;
 		this.wordTable = new HashMap<>();
 		this.words = new ArrayList<>();
@@ -27,11 +42,14 @@ public class Hangman{
 	}
 
 
+	/**
+	 * Injest method used to add words to RadixTree
+	 **/ 
 	public void injestWords(){	//// Will have to modify to place words into rdix tree
 	
 	// Read in data
 	String filePath = ""; 
-	filePath = "";
+	filePath = words.txt;
 	
 	try{
 		File file = new File(filePath);
@@ -47,11 +65,9 @@ public class Hangman{
 				continue;
 			}
 		
-			// Use scanner to injest the word entries in .txt file 
-			String[] parts = line.split(",");
+			String[] parts = line.split("/");
 			String word = parts[0];
 			String hint = parts[1];
-
 
 			words.add(word);
 			radixTree.insert(word); // Assuming insert method for RadixTree is implemented 
@@ -67,40 +83,49 @@ public class Hangman{
 	}
 
 
+	/**
+	 * 
+	 * checkGameOver method allows us to determine when the game is over
+	 * 
+	 * If the current number of incorrect guess equals the number of allowed, 
+	 * incorrect guesses return true, else return false
+	 * 
+	 **/
 	public boolean checkGameOver(){
 
 		if(this.difficulty == 3){
-			return this.numIncorrectAttempts == 6;
+			return this.numIncorrectAttempts == HARD_MAX_NUM_INCORRECT;
 		}
-		if(this.difficulty == 2){
-			return this.numIncorrectAttempts == 8;
+		else if(this.difficulty == 2){
+			return this.numIncorrectAttempts == MEDIUM_MAX_NUM_INCORRECT;
 		}
-		if(this.difficulty == 1){
-			return this.numIncorrectAttempts == 10;
+		else{
+			return this.numIncorrectAttempts == EASY_MAX_NUM_INCORRECT;
 		}
-
 	}
 
-	
+	/**
+	 * generateNewWord method allows us to randomly generate a letter of length n, determined by player
+	 **/
 
 	public void generateNewWord(){
 
+		// Initialize new Random class to generate random index
 		Random rand = new Random();
 		int randInd = rand.nextInt(words.size());
+
+		// Get the word associated with the random index from the arrayList of words
 		String randomWord = words.get(randInd);
-		return ;
+		targetWord = randomWord;
+		return;
 	}
 
-
+	/**
+	 * offerHint method allows us to return cross-word style hint associated with given word in wordTable map
+	 **/
 	public void offerHint(){
 		return wordTable.get(randomWord);
 	}
-
-
-	public void makeSuggestions(){
-
-		}
-	
 
 
 
