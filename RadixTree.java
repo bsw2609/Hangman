@@ -26,46 +26,57 @@ class RadixTreeNode{
 
 	
 	public void insert(String word){
-		if(prefix.equals(word)&& !isLeaf){
-			isLeaf = true;
-		}
-		else if(!word.startsWith(prefix)){
-			//no common prefix, create new node w entire word as its prefix 
-			RadixTreeNode newNode = new RadixTreeNode(word, true);
-			nodes.put(word.charAt(0), newNode);
-		}
-		else{
-			//there's a common prefix, split node
-			int sharedPreLen = sharedPreLen(word, prefix);
-			String reaminPre = prefix.substring(sharedPreLen);
-			if(reaminPre.isEmpty()){
-				//current nodes prefix is a prefix of word 
-				char nextChar = word.charAt(sharedPreLen);
-				RadixTreeNode childNode = nodes.get(nextChar);
-				if(childNode == null){
-					childNode = new RadixTreeNode(word.substring(sharedPreLen), true);
-					nodes.put(nextChar, childNode);
-				}
-				else{
-					childNode.insert(word.substring(sharedPreLen));
+		//if current prefix is in word
+		if(word.startsWith(prefix)){
+			//if word is prefix
+			if(word.equals(prefix)){
+				isLeaf = true; //mark current node as leaf
+			}else{
+			//get remainder
+				String remainder = word.substring(prefix.length());
+				//check if theirs a child node 
+				if(nodes.containsKey(remainder.charAt(0))){
+					//recursivley add remainder 
+					nodes.get(remainder.charAt(0)).insert(remainder);
+				}else{
+					//no child, create new node w remainder as prefix
+					RadixTreeNode newNode = new RadixTreeNode(remainder, true);
+					nodes.put(remainder.charAt(0), newNode);
 				}
 			}
-			else{
-				//split current node and insert new nodes for remaining prefixes
-				RadixTreeNode matchNode = nodes.get(word.charAt(sharedPreLen));
-				matchNode.prefix = reaminPre;
-				nodes.remove(word.charAt(sharedPreLen));
+		}else{
+			//if current prefix is not a prefix of word 
+			//no common prefix, split
+			int sharedPreLen = getSharedPreLen(word);
+			if(sharedPreLen >0){
+				//split current node into two nodes 
+				String sharedPre = word.substring(0, sharedPreLen);
+				String thisRem = prefix.substring(sharedPreLen);
+				String wordRem = word.substring(sharedPreLen);
+				prefix = sharedPre;
+				isLeaf = false;
+				//create new node for remaining part of prefix
+				RadixTreeNode remainderNode = new RadixTreeNode(thisRem, isLeaf);
+				remainderNode.nodes = nodes; //move child nodes to new node
+				nodes = new HashMap<>(); //clear child nodes of the current node
+				nodes.put(thisRem.charAt(0), remainderNode);
+				//recursivley insert remaining part of word 
+				RadixTreeNode wordRemNode = new RadixTreeNode(wordRem, true);
+				nodes.put(wordRem.charAt(0), wordRemNode);
+				RadixTreeNode newNode = new RadixTreeNode(word, true);
+				nodes.put(word.charAt(0), newNode);
+			}else{
+				//no common prefix, insert as new node 
+				nodes.put(word.charAt(0), new RadixTreeNode(word, true));
+			}
 
-				RadixTreeNode newNode = new RadixTreeNode(word.substring(sharedPreLen), true);
-				matchNode.nodes.put(word.charAt(sharedPreLen), newNode);
-			}
 		}
 	}
-	private int sharedPreLen(String word1, String word2){
-		int len = Math.min(word1.length(), word2.length());
+	private int getSharedPreLen(String word){
 		int sharedLen = 0;
-		for(int i = 0; i<len; i++){
-			if(word1.charAt(i) == word2.charAt(i)){
+		int minLen = Math.min(prefix.length(), word.length());
+		for(int i = 0; i<minLen; i++){
+			if(prefix.charAt(i) == word.charAt(i)){
 				sharedLen++;
 			}
 			else{
