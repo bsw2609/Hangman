@@ -1,13 +1,9 @@
 package tree;
 
 import java.util.Scanner;
-
 import java.util.Random;
 import java.io.*;
-
 import java.util.ArrayList;
-
-
 
 
 public class Game{
@@ -25,19 +21,28 @@ public class Game{
 		System.out.println("Select difficulty: Easy (1), Medium (2), Hard (3)");
 		int difficulty = scan.nextInt();
 
-		scan.close();
+		
 
 		Hangman hangmanGame = new Hangman(length, difficulty);
+		hangmanGame.injestWords();
+		hangmanGame.generateNewWord();
+
+		System.out.println(hangmanGame.targetWord);
 
 		int maxIncorrectGuesses = hangmanGame.maxIncorrectAtempts;
 		System.out.println("You have "+ maxIncorrectGuesses+" guesses to guess the word. Goodluck!");
 
 
-		while(!hangmanGame.checkGameOver()){
+		
 
+		while(hangmanGame.gameOver == false){
+
+		Scanner scan2 = new Scanner(System.in);
+
+		System.out.println(hangmanGame.targetWord);
 		System.out.println("Guess a letter: "); 
 
-		String guessedLetter = scan.nextLine(); // Add if statement to check length of string 
+		String guessedLetter = scan2.nextLine(); // Add if statement to check length of string 
 		char guessedLetter2 = guessedLetter.charAt(0);
 
 		boolean isIn = hangmanGame.checkForLetter(guessedLetter2);
@@ -47,10 +52,12 @@ public class Game{
 			hangmanGame.checkGameOver();
 		}
 
+
 		System.out.println(hangmanGame.emptyWord.toString());
 
 
 		}
+
 
 
 

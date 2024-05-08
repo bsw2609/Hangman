@@ -60,7 +60,7 @@ public class Hangman{
 	
 	// Read in data
 	String filePath; 
-	filePath = "Hangman/words.txt";
+	filePath = "HangmanFiles/words.txt";
 	
 	try{
 		File file = new File(filePath);
@@ -102,16 +102,24 @@ public class Hangman{
 	 * incorrect guesses return true, else return false
 	 * 
 	 **/
-	public boolean checkGameOver(){
+	public void checkGameOver(){
 
 		if(this.difficulty == 3){
-			return this.numIncorrectAttempts == HARD_MAX_NUM_INCORRECT;
+
+			if(this.numIncorrectAttempts == HARD_MAX_NUM_INCORRECT){
+				gameOver = true;
+			}
 		}
 		else if(this.difficulty == 2){
-			return this.numIncorrectAttempts == MEDIUM_MAX_NUM_INCORRECT;
+
+			if(this.numIncorrectAttempts == MEDIUM_MAX_NUM_INCORRECT){
+				gameOver = true;
+			}
 		}
 		else{
-			return this.numIncorrectAttempts == EASY_MAX_NUM_INCORRECT;
+			if(this.numIncorrectAttempts == EASY_MAX_NUM_INCORRECT){
+				gameOver = true;
+			}
 		}
 	}
 
@@ -128,7 +136,6 @@ public class Hangman{
 		// Get the word associated with the random index from the arrayList of words
 		String randomWord = words.get(randInd);
 		targetWord = randomWord;
-		return;
 	}
 
 	/**
@@ -141,8 +148,8 @@ public class Hangman{
 
 	public boolean checkForLetter(char letter){
 
-		for(int i = 0; i<targetWord.length()-1; i++){
-			if(targetWord.charAt(i) == letter){
+		for(int i = 0; i<targetWord.length(); i++){
+			if(letter == targetWord.charAt(i)){
 				this.emptyWord.add(i, letter);
 				return true;
 			}
