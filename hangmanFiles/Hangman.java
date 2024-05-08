@@ -1,5 +1,14 @@
 package tree;
 
+import java.util.Random;
+import java.io.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+
+
 public class Hangman{
 
 	// Instance variables
@@ -11,7 +20,8 @@ public class Hangman{
 	boolean gameOver; // Boolean to detrmine when game is over
 
 	String targetWord; // Target word that will be randomly generated
-	Map<String, String> wordTable; // Word table to hold words as keys and hints as values
+	ArrayList<Character> emptyWord;
+	HashMap<String, String> wordTable; 
 	ArrayList<String> words; // Array list to hold words also in Radix tree
 
 	// Number of allowed incorrect guesses, given different difficulties
@@ -36,9 +46,10 @@ public class Hangman{
 			this.maxIncorrectAtempts = MEDIUM_MAX_NUM_INCORRECT;
 		}
 		this.numIncorrectAttempts = 0;
-		this.wordTable = new HashMap<>();
+		this.wordTable = new HashMap<String, String>();
 		this.words = new ArrayList<>();
 		this.gameOver = false;
+		this.emptyWord = new ArrayList<Character>();
 	}
 
 
@@ -48,8 +59,8 @@ public class Hangman{
 	public void injestWords(){	//// Will have to modify to place words into rdix tree
 	
 	// Read in data
-	String filePath = ""; 
-	filePath = words.txt;
+	String filePath; 
+	filePath = "Hangman/words.txt";
 	
 	try{
 		File file = new File(filePath);
@@ -70,7 +81,7 @@ public class Hangman{
 			String hint = parts[1];
 
 			words.add(word);
-			radixTree.insert(word); // Assuming insert method for RadixTree is implemented 
+			// radixTree.insert(word); // Assuming insert method for RadixTree is implemented 
 			wordTable.put(word, hint);
 		}
 		scanner.close();
@@ -123,9 +134,24 @@ public class Hangman{
 	/**
 	 * offerHint method allows us to return cross-word style hint associated with given word in wordTable map
 	 **/
-	public void offerHint(){
-		return wordTable.get(randomWord);
+	public String offerHint(){
+		return wordTable.get(targetWord);
 	}
+
+
+	public boolean checkForLetter(char letter){
+
+		for(int i = 0; i<targetWord.length()-1; i++){
+			if(targetWord.charAt(i) == letter){
+				this.emptyWord.add(i, letter);
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+
 
 
 
