@@ -214,6 +214,7 @@ public class RadixTree{
         tree.add("application");
         tree.add("are");
         tree.add("append");
+        // test comment
         tree.add("predicate");
         tree.add("predispose");
         tree.add("pretend");
