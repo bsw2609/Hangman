@@ -158,6 +158,14 @@ public class Hangman{
 
 	}
 
+	/**
+	 * Offer suggestions to complete the word based on prefix 
+	 * (or first three letters as correctly gussed).
+	 * */
+	public List<String> offerSuggestions(){
+		return suggestions.findWordsWPrefix(prefix);
+	}
+
 
 
 
