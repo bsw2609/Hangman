@@ -178,9 +178,7 @@ public class RadixTree{
 		RadixTreeNode currentNode = findNodeByPrefix(root, prefix);
 
 		if(currentNode != null){
-			//if found, perform search 
 			depthFS(currentNode, "" , prefix, words);
-			//dfs(currentNode, prefix, "", words);
 		}
 		else{
 			//if not found return empty list
@@ -198,9 +196,6 @@ public class RadixTree{
 			if(node.children.containsKey(c)){
 				node = node.children.get(c);
 			}
-			//else{
-			 	//return null; //prefix not found 
-			//}
 		}
 		return node;
 	}
@@ -214,7 +209,6 @@ public class RadixTree{
         tree.add("application");
         tree.add("are");
         tree.add("append");
-        // test comment
         tree.add("predicate");
         tree.add("predispose");
         tree.add("pretend");
