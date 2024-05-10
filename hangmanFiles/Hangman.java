@@ -24,13 +24,12 @@ public class Hangman{
 	ArrayList<Character> emptyWord;
 	HashMap<String, String> wordTable; 
 	ArrayList<String> words; // Array list to hold words also in Radix tree
-	List<String> suggestions; //List of strings to hold suggestions
+	RadixTree radixTree; //hold radix tree instances 
 
 	// Number of allowed incorrect guesses, given different difficulties
 	public final int EASY_MAX_NUM_INCORRECT = 10; 
 	public final int MEDIUM_MAX_NUM_INCORRECT = 8;
 	public final int HARD_MAX_NUM_INCORRECT = 6;
-	RadixTree radixTree; //hold radix tree instances 
 	
 	// Constructor Method
 	public Hangman(int numLetters, int difficulty){
