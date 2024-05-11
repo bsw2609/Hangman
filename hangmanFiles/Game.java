@@ -15,24 +15,26 @@ public class Game{
 
 		Scanner scan = new Scanner(System.in);
 
-		System.out.println("Enter length of word");
+		System.out.println("Enter length of word: 3-10");
 		int length = scan.nextInt();
 
 		System.out.println("Select difficulty: Easy (1), Medium (2), Hard (3)");
 		int difficulty = scan.nextInt();
 
-		
-
 		Hangman hangmanGame = new Hangman(length, difficulty);
-		
-		hangmanGame.injestWords();
-		// hangmanGame.filterWords(length);
-		hangmanGame.generateNewWord();
-		hangmanGame.radixTree.printTree();
 
-		System.out.println(hangmanGame.targetWord);
+
+
+		hangmanGame.injestWords();
+		hangmanGame.filterWords(length);
+		hangmanGame.generateNewWord();
+		hangmanGame.setEmptyWord();
+
+
+		// hangmanGame.radixTree.printTree();
 
 		int maxIncorrectGuesses = hangmanGame.maxIncorrectAtempts;
+
 		System.out.println("You have "+ maxIncorrectGuesses+" guesses to guess the word. Goodluck!");
 
 		System.out.println("	_____________");
@@ -51,38 +53,54 @@ public class Game{
 		System.out.println();
 		
 
-		while(hangmanGame.gameOver == false){
+
+
+
+
+		while(hangmanGame.numIncorrectAttempts < maxIncorrectGuesses && hangmanGame.gameWin == false){
 
 		Scanner scan2 = new Scanner(System.in);
 
-		System.out.println(hangmanGame.targetWord);
+		// System.out.println(hangmanGame.targetWord + ": target");
 		System.out.println("Guess a letter: "); 
+
+		System.out.println(hangmanGame.targetWord);
 
 		String guessedLetter = scan2.nextLine(); // Add if statement to check length of string 
 		char guessedLetter2 = guessedLetter.charAt(0);
 
-		boolean isIn = hangmanGame.checkForLetter(guessedLetter2);
+		hangmanGame.checkForLetter(guessedLetter2);
 
-		if(!isIn){ 
+
+		ArrayList<Integer>  indicesOfLetterinWord = hangmanGame.checkForLetter(guessedLetter2);
+
+		if(indicesOfLetterinWord.size() > 0){
+			System.out.println("Great guess!");
+			hangmanGame.addTo(guessedLetter2, indicesOfLetterinWord);
+			hangmanGame.checkforWin();
+
+		}
+		else{
 			hangmanGame.numIncorrectAttempts++;
-			hangmanGame.checkGameOver();
+			System.out.println("Sorry the letter " + guessedLetter2+ " is not in the word. You have " + (hangmanGame.maxIncorrectAtempts - hangmanGame.numIncorrectAttempts) + " attempts left.");
 		}
 
+		hangmanGame.hangmanVisual();
 
-		// System.out.println(hangmanGame.emptyWord.toString());
+		System.out.println(hangmanGame.emptyWord.toString());
+
 
 
 		}
 
-		System.out.println("Sorry, you lose :( Better luck next time!");
+		if(hangmanGame.gameWin == true){
+			System.out.println("Congratulations, you win!");
+			System.out.println("The secret word is: " + hangmanGame.targetWord+ "!");
 
-
-
-
-
-
-
-
+		}
+		else{
+			System.out.println("Sorry, you lose :( Better luck next time!");
+		}
 
 	}
 }
