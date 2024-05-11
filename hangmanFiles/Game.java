@@ -24,15 +24,31 @@ public class Game{
 		
 
 		Hangman hangmanGame = new Hangman(length, difficulty);
+		
 		hangmanGame.injestWords();
+		// hangmanGame.filterWords(length);
 		hangmanGame.generateNewWord();
+		hangmanGame.radixTree.printTree();
 
 		System.out.println(hangmanGame.targetWord);
 
 		int maxIncorrectGuesses = hangmanGame.maxIncorrectAtempts;
 		System.out.println("You have "+ maxIncorrectGuesses+" guesses to guess the word. Goodluck!");
 
-
+		System.out.println("	_____________");
+		System.out.println("	|	  |");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.println("    ____|____");
+		System.out.println();
 		
 
 		while(hangmanGame.gameOver == false){
@@ -53,10 +69,12 @@ public class Game{
 		}
 
 
-		System.out.println(hangmanGame.emptyWord.toString());
+		// System.out.println(hangmanGame.emptyWord.toString());
 
 
 		}
+
+		System.out.println("Sorry, you lose :( Better luck next time!");
 
 
 

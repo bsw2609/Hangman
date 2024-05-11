@@ -23,6 +23,7 @@ public class Hangman{
 	ArrayList<Character> emptyWord;
 	HashMap<String, String> wordTable; 
 	ArrayList<String> words; // Array list to hold words also in Radix tree
+	RadixTree radixTree;
 
 	// Number of allowed incorrect guesses, given different difficulties
 	public final int EASY_MAX_NUM_INCORRECT = 10; 
@@ -50,6 +51,8 @@ public class Hangman{
 		this.words = new ArrayList<>();
 		this.gameOver = false;
 		this.emptyWord = new ArrayList<Character>();
+		this.radixTree = new RadixTree();
+
 	}
 
 
@@ -60,7 +63,8 @@ public class Hangman{
 	
 	// Read in data
 	String filePath; 
-	filePath = "HangmanFiles/words.txt";
+	filePath = "hangmanFiles/words.txt";
+
 	
 	try{
 		File file = new File(filePath);
@@ -80,11 +84,13 @@ public class Hangman{
 			String word = parts[0];
 			String hint = parts[1];
 
-			words.add(word);
-			// radixTree.insert(word); // Assuming insert method for RadixTree is implemented 
+			
+			radixTree.add(word); 
+			words.add(word); // Add words to arrayList of words so that we can easily generate a random 
 			wordTable.put(word, hint);
 		}
 		scanner.close();
+
 	}
 
 	catch(FileNotFoundException e){
@@ -123,6 +129,31 @@ public class Hangman{
 		}
 	}
 
+
+	// /**
+	//  * generateNewWord helper method to 
+	//  **/
+
+	// public void filterWords(int len){ // Our game only allows words of length 3 - 10 we must ensure our words.txt has words of each length 
+	// 	if(2 < len && len < 11){
+
+	// 		ArrayList<String> newList = new ArrayList<String>();
+	// 		for(String word : this.words){
+
+	// 			if(word.length() == len){
+	// 				newList.add(word);
+	// 			}
+	// 		}
+
+	// 		this.words = newList;
+	// 	}
+	
+	// }
+
+
+
+
+
 	/**
 	 * generateNewWord method allows us to randomly generate a letter of length n, determined by player
 	 **/
@@ -137,6 +168,8 @@ public class Hangman{
 		String randomWord = words.get(randInd);
 		targetWord = randomWord;
 	}
+
+
 
 	/**
 	 * offerHint method allows us to return cross-word style hint associated with given word in wordTable map

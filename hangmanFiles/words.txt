@@ -1,20 +1,24 @@
-Agriculture/Farming production
-Agribusiness/Commercial activities derived from farming
-Agronomy/Science of soil management
-Agrarian/Relating to land and its cultivation
-Agriculturalist/Expert in the science of farming and land management 
-Tree/Surrounds Williamstown
-Treat/Late-night snack
-Tread/____ carefully!
-Treated/Fixed by the healthcenter
-Tram/Would be nice to get to Albany
-Trade/Thoughtful exchange
-Troop/Military personnel
-Troops/Send in the ____
-Tribes/Aztec, Tejas, Sioux ...
-Trout/Rainbow fish
-Interact/Exchange of ideas
-Intercept/Cut off
-Interchange/A substitution
-Interfere/Disrupt
-Interpret/An understanding 
+agriculture/Farming production
+agribusiness/Commercial activities derived from farming
+agronomy/Science of soil management
+agrarian/Relating to land and its cultivation
+agriculturalist/Expert in the science of farming and land management 
+tree/Surrounds Williamstown
+treat/Late-night snack
+tread/____ carefully!
+treated/Fixed by the healthcenter
+tram/Would be nice to get to Albany
+trade/Thoughtful exchange
+troop/Military personnel
+troops/Send in the ____
+tribes/Aztec, Tejas, Sioux ...
+trout/Rainbow fish
+interact/Exchange of ideas
+intercept/Cut off
+interchange/A substitution
+interfere/Disrupt
+interpret/An understanding 
+jam/Colorful spread
+jammed/Stuck in a tough perdicament 
+jammable/capable of being blocked
+
