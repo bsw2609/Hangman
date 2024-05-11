@@ -170,9 +170,6 @@ public class Hangman{
 	}
 
 
-
-
-
 	/**
 	 * generateNewWord method allows us to randomly generate a letter of length n, determined by player
 	 **/
@@ -228,12 +225,11 @@ public class Hangman{
 	public void hangmanVisual(){
 
 		if (numIncorrectAttempts == 1){
-			System.out.println("	___________");
-			System.out.println("	|	 |");
-			System.out.println("	|        _");
-			System.out.println("	|       / \\");
-			System.out.println("	|      |   |");
-			System.out.println("	|       \\__/");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
 			System.out.println("	|");
 			System.out.println("	|");
 			System.out.println("	|");
@@ -241,102 +237,102 @@ public class Hangman{
 			System.out.println("	|");
 			System.out.println("	|");
 			System.out.println("	|");
-			System.out.println("     ____|____");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 			
 		}
 		else if (numIncorrectAttempts == 2){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
 			System.out.println("	|");
 			System.out.println("	|");
-			System.out.println("____|____");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
 
 		else if (numIncorrectAttempts == 3){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/");
-			System.out.println("	|		   /");
-			System.out.println("____|____");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|           /");
+			System.out.println("	|          /");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
 
 		else if (numIncorrectAttempts == 4){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|           / \\");
+			System.out.println("	|          /   \\");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}		
 
 		else if (numIncorrectAttempts == 5){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|		    /|");
-			System.out.println("	|		   / |");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|            |");
+			System.out.println("	|           /|");
+			System.out.println("	|          / |");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|           / \\");
+			System.out.println("	|          /   \\");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
 
 		else if (numIncorrectAttempts == 6){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|		    /|\\");
-			System.out.println("	|		   / | \\");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|            |");
+			System.out.println("	|           /|\\");
+			System.out.println("	|          / | \\");
+			System.out.println("	|            |");
+			System.out.println("	|            |");
+			System.out.println("	|           / \\");
+			System.out.println("	|          /   \\");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
@@ -354,7 +350,7 @@ public class Hangman{
 			System.out.println("	|			 |");
 			System.out.println("	|			/ \\");
 			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
@@ -372,7 +368,7 @@ public class Hangman{
 			System.out.println("	|			 |");
 			System.out.println("	|			/ \\");
 			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
@@ -390,7 +386,7 @@ public class Hangman{
 			System.out.println("	|			 |");
 			System.out.println("	|			/ \\");
 			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
@@ -409,7 +405,7 @@ public class Hangman{
 			System.out.println("	|			 |");
 			System.out.println("	|			/ \\");
 			System.out.println("	|		   /  \\");
-			System.out.println("____|____");
+			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)

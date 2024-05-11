@@ -75,6 +75,7 @@ public class Game{
 		ArrayList<Integer>  indicesOfLetterinWord = hangmanGame.checkForLetter(guessedLetter2);
 
 		if(indicesOfLetterinWord.size() > 0){
+			System.out.println();
 			System.out.println("Great guess!");
 			hangmanGame.addTo(guessedLetter2, indicesOfLetterinWord);
 			hangmanGame.checkforWin();
@@ -88,6 +89,8 @@ public class Game{
 		hangmanGame.hangmanVisual();
 
 		System.out.println(hangmanGame.emptyWord.toString());
+		System.out.println();
+
 
 
 
