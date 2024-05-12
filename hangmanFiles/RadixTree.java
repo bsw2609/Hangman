@@ -30,7 +30,7 @@ public class RadixTree{
 
 	/**
 	 * add word to radix tree
-	 **/
+	**/
 	public void add(String word){
 		word = word.toLowerCase();
 		RadixTreeNode currentNode = this.root;
@@ -79,7 +79,7 @@ public class RadixTree{
 	}
 	/**
 	 * helper method that finds common prefix between two strings
-	 * */
+	**/
 	private String getCommonPre(String a, String b){
 		StringBuilder commonPre = new StringBuilder();
 		for(int i=0; i<Math.min(a.length(), b.length()); i++){ //iterate through each to check characters
@@ -93,7 +93,7 @@ public class RadixTree{
 
 	/**
 	 * Traverse thorugh tree and use DFS, we want to find edges that match a common prefix
-	 **/
+	**/
 	public List<String> getWords(String prefix){
 		prefix = prefix.toLowerCase();
 		String word = "";
@@ -127,11 +127,9 @@ public class RadixTree{
 	/**
 	 * Depth first search method that helps us traverse through the tree to retrieve words
 	 **/
-	//i dont think it's running prefixes properly which is why it gets lost when one doesnt exist
 	private void depthFS(RadixTreeNode startNode, String prefix, String word, List<String> words){
 		System.out.println("Visiting node: " + startNode.edge);
 		System.out.println("Current word: " + word);
-		//System.out.println("Prefix: " + prefix);
 		if(startNode.isWord && !word.equals("")){
 			System.out.println("Found word: " + word);
 			words.add(word);
@@ -221,7 +219,6 @@ public class RadixTree{
 		System.out.println("Words with prefix 'app': " + wordsWithPrefix);
 		List<String> wordsWithPrefix2 = tree.findWordsWPrefix("pre");
 		System.out.println("Words with prefix 'pre': " + wordsWithPrefix2); 
-		//still need to debug for prefix that doesnt exist!!
 	}
 
 
