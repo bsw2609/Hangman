@@ -120,20 +120,35 @@ public class Hangman{
 
 		}
 
-		if(temp.size() != targetWord.length()){
-			gameWin = false;
-		}
-		else{
+		if(temp.size() == targetWord.length()){
 
-		for(int i = 0; i < temp.size(); i++){
-			if(targetWord.charAt(i) == temp.get(i)){
-				continue;
+			gameWin = true;
+			for(int i = 0; i < targetWord.length(); i++){
+				if(temp.get(i) != targetWord.charAt(i)){
+					gameWin = false;
+					break;
+				}
 			}
+		}
+
+		else {
 			gameWin = false;
 		}
-		gameWin = true;
 
-		}
+		// if(temp.size() != targetWord.length()){
+		// 	gameWin = false;
+		// }
+		// else{
+
+		// 	for(int i = 0; i < temp.size(); i++){
+		// 		if(targetWord.charAt(i) == temp.get(i)){
+		// 			continue;
+		// 		}
+		// 		gameWin = false;
+		// 	}
+		// 	gameWin = true;
+
+		// }
 	}
 
 
@@ -164,7 +179,7 @@ public class Hangman{
 
 	public void setEmptyWord(){
 		for(int i = 0; i < targetWord.length(); i++){
-			emptyWord.add((char) '-');
+			emptyWord.add((char) '_');
 		}
 	}
 
@@ -189,12 +204,12 @@ public class Hangman{
 	/**
 	 * offerHint method allows us to return cross-word style hint associated with given word in wordTable map
 	 **/
-	public String offerHint(){
-		return wordTable.get(targetWord);
+	public void offerHint(){
+		System.out.println(wordTable.get(targetWord));
 	}
 
 
-	public ArrayList<Integer>  checkForLetter(char letter){
+	public ArrayList<Integer> checkForLetter(char letter){
 
 		ArrayList<Integer> indices = new ArrayList<Integer>();
 
@@ -215,7 +230,7 @@ public class Hangman{
 	public void addTo(char letter, ArrayList<Integer> indices){
 
 		for(int i : indices){
-			emptyWord.add(i, letter);
+			emptyWord.set(i, letter);
 		}	
 	}
 
@@ -346,54 +361,54 @@ public class Hangman{
 			System.out.println();//print out guessed letters)
 		}
 		else if (numIncorrectAttempts == 7){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|		    /|\\");
-			System.out.println("	|		   / | \\");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|            |");
+			System.out.println("	|           /|\\");
+			System.out.println("	|          / | \\");
+			System.out.println("	|            |");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
 			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
 		else if (numIncorrectAttempts == 8){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /   \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|		    /|\\");
-			System.out.println("	|		   / | \\");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
 			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
 		else if (numIncorrectAttempts == 9){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /x  \\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|		    /|\\");
-			System.out.println("	|		   / | \\");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /x   \\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
 			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
@@ -401,18 +416,18 @@ public class Hangman{
 			
 		}
 		else if (numIncorrectAttempts == 10){
-			System.out.println("	___________");
-			System.out.println("	|			_|_");
-			System.out.println("	|		   /x  x\\");
-			System.out.println("	|		  |		|");
-			System.out.println("	|		   \\__//");
-			System.out.println("	|			 |");
-			System.out.println("	|		    /|\\");
-			System.out.println("	|		   / | \\");
-			System.out.println("	|			 |");
-			System.out.println("	|			 |");
-			System.out.println("	|			/ \\");
-			System.out.println("	|		   /  \\");
+			System.out.println("	__________________");
+			System.out.println("	|           _|_");
+			System.out.println("	|          /x  x\\");
+			System.out.println("	|         |     |");
+			System.out.println("	|          \\__ /");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
+			System.out.println("	|");
 			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)

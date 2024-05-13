@@ -61,13 +61,19 @@ public class Game{
 
 		Scanner scan2 = new Scanner(System.in);
 
-		// System.out.println(hangmanGame.targetWord + ": target");
-		System.out.println("Guess a letter: "); 
+		System.out.println("Guess a letter or press '@' for a hint: "); 
 
-		System.out.println(hangmanGame.targetWord);
+		// System.out.println(hangmanGame.targetWord);
+
+
 
 		String guessedLetter = scan2.nextLine(); // Add if statement to check length of string 
 		char guessedLetter2 = guessedLetter.charAt(0);
+
+		if(guessedLetter2 == '@'){
+			hangmanGame.offerHint();
+			continue;
+		}
 
 		hangmanGame.checkForLetter(guessedLetter2);
 
@@ -103,6 +109,8 @@ public class Game{
 		}
 		else{
 			System.out.println("Sorry, you lose :( Better luck next time!");
+			System.out.println("The secret word is: " + hangmanGame.targetWord+ "!");
+
 		}
 
 	}
