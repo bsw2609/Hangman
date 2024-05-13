@@ -28,7 +28,9 @@ public class RadixTree{
 		this.root = new RadixTreeNode("");
 	}
 
-	//add word to radix tree
+	/**
+	 * add word to radix tree
+	 **/
 	public void add(String word){
 		word = word.toLowerCase();
 		RadixTreeNode currentNode = this.root;
@@ -75,7 +77,9 @@ public class RadixTree{
 			}
 		}
 	}
-	//finds common prefix between two strings
+	/**
+	 * helper method that finds common prefix between two strings
+	 * */
 	private String getCommonPre(String a, String b){
 		StringBuilder commonPre = new StringBuilder();
 		for(int i=0; i<Math.min(a.length(), b.length()); i++){ //iterate through each to check characters
@@ -87,7 +91,9 @@ public class RadixTree{
 		return commonPre.toString(); //returns string rep
 	}
 
-	//traverse thorugh tree and use DFS, we want to find edges that match a common prefix
+	/**
+	 * Traverse thorugh tree and use DFS, we want to find edges that match a common prefix
+	 **/
 	public List<String> getWords(String prefix){
 		prefix = prefix.toLowerCase();
 		String word = "";
@@ -118,7 +124,9 @@ public class RadixTree{
 		depthFS(currentNode, prefix, "", words);
 		return words;
 	}
-
+	/**
+	 * Depth first search method that helps us traverse through the tree to retrieve words
+	 **/
 	//i dont think it's running prefixes properly which is why it gets lost when one doesnt exist
 	private void depthFS(RadixTreeNode startNode, String prefix, String word, List<String> words){
 		System.out.println("Visiting node: " + startNode.edge);
@@ -139,6 +147,9 @@ public class RadixTree{
 		}
 	}
 
+	/**
+	 * Method to provide visual for the tree structure.
+	 **/
 	public void printTree(){
 		System.out.println("Tree structure:");
 		printRecursion(root, 0);
@@ -157,17 +168,17 @@ public class RadixTree{
 		}
 	}
 
-	//This method finds the node corresponding to the prefix and then initiates 
-	//a DFS search from that node to collect words with the given prefix.
+	/**
+	 * This method finds the node corresponding to the prefix and then initiates 
+	 * a DFS search from that node to collect words with the given prefix.
+	 **/
 	public List<String> findWordsWPrefix(String prefix){
 		prefix = prefix.toLowerCase();
 		List<String> words = new ArrayList<>();
 		RadixTreeNode currentNode = findNodeByPrefix(root, prefix);
 
 		if(currentNode != null){
-			//if found, perform search 
 			depthFS(currentNode, "" , prefix, words);
-			//dfs(currentNode, prefix, "", words);
 		}
 		else{
 			//if not found return empty list
@@ -175,15 +186,16 @@ public class RadixTree{
 		}
 		return words;
 	}
+	/**
+	 * Helper method to find nodes that corresponf to a provided prefixm this helps us 
+	 * in our specifc search method
+	 **/
 	private RadixTreeNode findNodeByPrefix(RadixTreeNode node, String prefix){
 		//traverse tree to find the node corrsponding to the prefix 
 		for(char c : prefix.toCharArray()){
 			if(node.children.containsKey(c)){
 				node = node.children.get(c);
 			}
-			//else{
-			 	//return null; //prefix not found 
-			//}
 		}
 		return node;
 	}

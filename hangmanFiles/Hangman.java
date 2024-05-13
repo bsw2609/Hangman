@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 
 
@@ -23,13 +24,12 @@ public class Hangman{
 	ArrayList<Character> emptyWord;
 	HashMap<String, String> wordTable; 
 	ArrayList<String> words; // Array list to hold words also in Radix tree
-	RadixTree radixTree;
+	RadixTree radixTree; //hold radix tree instances 
 
 	// Number of allowed incorrect guesses, given different difficulties
 	public final int EASY_MAX_NUM_INCORRECT = 10; 
 	public final int MEDIUM_MAX_NUM_INCORRECT = 8;
 	public final int HARD_MAX_NUM_INCORRECT = 6;
-
 	
 	// Constructor Method
 	public Hangman(int numLetters, int difficulty){
@@ -52,7 +52,6 @@ public class Hangman{
 		this.gameWin = false;
 		this.emptyWord = new ArrayList<Character>();
 		this.radixTree = new RadixTree();
-
 	}
 
 
@@ -220,6 +219,15 @@ public class Hangman{
 		}	
 	}
 
+	/**
+	*Offer suggestions to complete the word based on the given prefix.
+	* @param prefix The prefix to use for offering suggestions.
+ 	* @return A list of suggested words.
+ 	**/
+	public List<String> offerSuggestions(String prefix){
+	 	return radixTree.findWordsWPrefix(prefix);
+	}
+//test
 
 
 	public void hangmanVisual(){

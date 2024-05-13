@@ -13,6 +13,11 @@ troop/Military personnel
 troops/Send in the ____
 tribes/Aztec, Tejas, Sioux ...
 trout/Rainbow fish
+trinket/small item of little value
+trout/Rainbow fish
+trunk/the base of a tree
+trust/firm belief in someone or something
+true/in accordance to fact or reality
 interact/Exchange of ideas
 intercept/Cut off
 interchange/A substitution
@@ -28,4 +33,31 @@ ballooned/Progressively increased
 bandwidth/Measure of capacity within which waves may travel, essential in communications
 baselines/protocol benchmark
 basketful/Full ____ of flowers
-
+apple/A fruit
+application/Something you sumbit for a job
+apply/Something you do to get a job
+appear/To come about 
+appeal/A serious or urjent request 
+pretend/To make something appear as it's not 
+prepare/To make ready
+preliminary/A preceding event
+prevent/To keep from occuring 
+precaution/Advanced action to prevent something from bad occuring
+create/to make up
+crease/line or ridge made from folding 
+credit/aility to obtain goods based on trust
+explain/make clear to someone through description 
+expire/cease to be valid or gone bad
+expert/someone with exceptional knowledge or skill
+exceptional/unusual, not typical
+exposition/comprehensive description of idea or theory
+remind/to cause someone to remember 
+redo/to do something again differently
+rebound/to bounce back after hitting another surface 
+relocate/to move to a new place 
+reestablish/to establish something again, anew
+remainder/what's left over after division 
+deposit/a sum of money kept in bank, the action of putting money in the bank
+definitely/without doubt 
+deliver/to bring to someone
+delicate/very fine in texture or structure
