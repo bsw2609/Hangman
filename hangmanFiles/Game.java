@@ -59,7 +59,16 @@ public class Game{
 
 		// Prompt for guess or hint //
 		Scanner scan2 = new Scanner(System.in);
-		System.out.println("Guess a letter or press '@' for a hint: "); 
+
+		String strPrefix1 = hangmanGame.toStringforPrefix();
+
+		if(strPrefix1.length() == 3){
+			System.out.println("Guess a letter or press! Or request a hint '@'. Or request a suggestion for the next letter '?':"); 
+		}
+		else{
+			System.out.println("Guess a letter or press! Or request a hint '@'."); 
+		}
+
 
 		// Processing guess //
 		String guessedLetter = scan2.nextLine(); // Add if statement to check length of string 
@@ -70,6 +79,8 @@ public class Game{
 			hangmanGame.offerHint();
 			continue;
 		}
+
+
 		if(!hangmanGame.alreadyGuessed.contains(guessedLetter2)){
 			hangmanGame.alreadyGuessed.add(guessedLetter2);
 		}
@@ -84,11 +95,29 @@ public class Game{
 		// If the array contains at least one index, we know the guessed letter is found in the word //
 		if(indicesOfLetterinWord.size() > 0){
 			System.out.println();
-			System.out.println("Great guess!");
+			System.out.println("Great guess! Current word:");
+
+			int firstIndex = indicesOfLetterinWord.get(0);
+
+			hangmanGame.currentPrefix.set(firstIndex, guessedLetter2);
+
 			hangmanGame.addTo(guessedLetter2, indicesOfLetterinWord);
 			hangmanGame.checkforWin();
 
 		}
+
+		else if(guessedLetter2 == '?'){
+			
+			String strPrefix = hangmanGame.toStringforPrefix();
+			if(strPrefix.length() >= 3){
+				System.out.println("A list of possible words: "+hangmanGame.offerSuggestions(strPrefix));
+				continue;
+
+			}
+			
+		}
+
+
 		// Wrong guess, increment numIncorrectAttempts and let player know they are wrong
 		else{
 			hangmanGame.numIncorrectAttempts++;
@@ -98,7 +127,7 @@ public class Game{
 		hangmanGame.hangmanVisual();
 
 		// Print out the portion of the completed word for the player
-		System.out.println(hangmanGame.emptyWord.toString()+"               Guessed letters: "+hangmanGame.alreadyGuessed.toString());
+		System.out.println(hangmanGame.emptyWord.toString()+"               Guessed letters: "+hangmanGame.alreadyGuessed);
 		System.out.println();
 
 		}

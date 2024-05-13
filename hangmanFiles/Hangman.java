@@ -17,6 +17,7 @@ public class Hangman{
 	int numIncorrectAttempts; // Number of current incorrect guesses
 	int maxIncorrectAtempts; // Number of allowed incorrect guesses
 	boolean gameWin; // Boolean to detrmine when game is over
+	ArrayList<Character> currentPrefix; 
 
 	String targetWord; // Target word that will be randomly generated
 	ArrayList<Character> emptyWord;
@@ -52,6 +53,7 @@ public class Hangman{
 		this.emptyWord = new ArrayList<Character>();
 		this.alreadyGuessed = new ArrayList<Character>();
 		this.radixTree = new RadixTree();
+		this.currentPrefix = new ArrayList<Character>();
 	}
 
 	/**
@@ -127,19 +129,20 @@ public class Hangman{
 				}
 			}
 		}
-
 		else {
 			gameWin = false;
 		}
 	}
 
 	/**
-	 * generateNewWord helper method to 
+	 * filterWords helper method to 
+	 * @param len length specified by player
+	 * Our game only allows words of length 3 - 10
 	 **/
-
-	public void filterWords(int len){ // Our game only allows words of length 3 - 10 we must ensure our words.txt has words of each length 
+	public void filterWords(int len){ 
 		if(2 < len && len < 11){
-
+			// Initialize new ArrayList and iterate over all words checking if they match the //
+			// specified length, finally adding those words to newList after //
 			ArrayList<String> newList = new ArrayList<String>();
 			for(String word : this.words){
 
@@ -152,19 +155,18 @@ public class Hangman{
 	}
 
 	/**
-	 * 
+	 * Setter method. Sets empty word to an Array List with all "-"
 	 **/
-
 	public void setEmptyWord(){
 		for(int i = 0; i < targetWord.length(); i++){
 			emptyWord.add((char) '_');
+			currentPrefix.add((char) '_');
 		}
 	}
 
 	/**
 	 * generateNewWord method allows us to randomly generate a letter of length n, determined by player
 	 **/
-
 	public void generateNewWord(){
 
 		// Initialize new Random class to generate random index
@@ -177,16 +179,22 @@ public class Hangman{
 	}
 
 	/**
-	 * offerHint method allows us to return cross-word style hint associated with given word in wordTable map
+	 * offerHint method returns a cross-word style hint associated with given word in wordTable Hashmap //
 	 **/
 	public void offerHint(){
 		System.out.println("Hint: "+wordTable.get(targetWord));
 	}
 
+	/**
+	 * checkForLetter method returns a ArrayList of integers representing where the guessed letters are in the targetWord //
+	 * @param letter Guessed letter (incorrect or correct) //
+	 **/
 	public ArrayList<Integer> checkForLetter(char letter){
 
+		// Initialize new ArrayList to store indices where letter exists in targetWord //
 		ArrayList<Integer> indices = new ArrayList<Integer>();
 
+		// Iterate through indices of targetWord and check if letter is equal //
 		for(int i = 0; i<targetWord.length(); i++){
 
 			if(letter != targetWord.charAt(i)){
@@ -198,10 +206,13 @@ public class Hangman{
 	}
 
 	/**
-	 * 
+	 * adds the correctly guessed letter into every index that is stored in indices arrayList //
+	 * @param letter Correctly guessed letter //
+	 * @param indices ArrayList of indices where the letter is found in targetWord //
 	 **/
 	public void addTo(char letter, ArrayList<Integer> indices){
 
+		// Enhance for loop to iterate through integers in ArrayList indices
 		for(int i : indices){
 			emptyWord.set(i, letter);
 		}	
@@ -214,6 +225,31 @@ public class Hangman{
  	**/
 	public List<String> offerSuggestions(String prefix){
 	 	return radixTree.findWordsWPrefix(prefix);
+	}
+
+
+	/**
+	* toStringforPrefix to convert currentPrefix ArrayList to a string 
+	* this will then be passed into the offerSuggstions method
+ 	**/
+	public String toStringforPrefix(){
+
+		// Initialize empty string and boolean so we can determine when to stop
+		String str = "";
+		boolean end = false;
+		while(!end){
+
+			for(int i = 0; i < currentPrefix.size(); i++){
+				// If the charcter is not '_', concat to empty string
+				if(currentPrefix.get(i) == (char) '_'){
+					end = true;
+				}
+				else{
+				str = str.concat(String.valueOf(currentPrefix.get(i)));
+				}
+			}
+		}
+		return str;
 	}
 
 	// Visual for hangman game for different numIncorrectGuesses //

@@ -128,19 +128,19 @@ public class RadixTree{
 	 * Depth first search method that helps us traverse through the tree to retrieve words
 	 **/
 	private void depthFS(RadixTreeNode startNode, String prefix, String word, List<String> words){
-		System.out.println("Visiting node: " + startNode.edge);
-		System.out.println("Current word: " + word);
+		// System.out.println("Visiting node: " + startNode.edge);
+		// System.out.println("Current word: " + word);
 		if(startNode.isWord && !word.equals("")){
-			System.out.println("Found word: " + word);
+			// System.out.println("Found word: " + word);
 			words.add(word);
 		}
 		if(startNode.children.isEmpty()){
-			System.out.println("No children, returning");
+			// System.out.println("No children, returning");
 			return;
 		}
 		for(char character : startNode.children.keySet()){
 			RadixTreeNode childNode = startNode.children.get(character);
-			System.out.println("Traversing edge: " + childNode.edge);
+			// System.out.println("Traversing edge: " + childNode.edge);
 			depthFS(childNode, prefix, word + childNode.edge, words);
 		}
 	}
