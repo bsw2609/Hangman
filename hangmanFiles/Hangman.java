@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
-
-
 public class Hangman{
 
 	// Instance variables
@@ -22,6 +20,7 @@ public class Hangman{
 
 	String targetWord; // Target word that will be randomly generated
 	ArrayList<Character> emptyWord;
+	ArrayList<Character> alreadyGuessed;;
 	HashMap<String, String> wordTable; 
 	ArrayList<String> words; // Array list to hold words also in Radix tree
 	RadixTree radixTree; //hold radix tree instances 
@@ -51,9 +50,9 @@ public class Hangman{
 		this.words = new ArrayList<>();
 		this.gameWin = false;
 		this.emptyWord = new ArrayList<Character>();
+		this.alreadyGuessed = new ArrayList<Character>();
 		this.radixTree = new RadixTree();
 	}
-
 
 	/**
 	 * Injest method used to add words to RadixTree
@@ -64,7 +63,6 @@ public class Hangman{
 	String filePath; 
 	filePath = "HangmanFiles/words.txt";
 
-	
 	try{
 		File file = new File(filePath);
 		Scanner scanner = new Scanner(file);
@@ -100,7 +98,6 @@ public class Hangman{
 
 	}
 
-
 	/**
 	 * 
 	 * checkGameOver method allows us to determine when the game is over
@@ -134,23 +131,7 @@ public class Hangman{
 		else {
 			gameWin = false;
 		}
-
-		// if(temp.size() != targetWord.length()){
-		// 	gameWin = false;
-		// }
-		// else{
-
-		// 	for(int i = 0; i < temp.size(); i++){
-		// 		if(targetWord.charAt(i) == temp.get(i)){
-		// 			continue;
-		// 		}
-		// 		gameWin = false;
-		// 	}
-		// 	gameWin = true;
-
-		// }
 	}
-
 
 	/**
 	 * generateNewWord helper method to 
@@ -166,12 +147,9 @@ public class Hangman{
 					newList.add(word);
 				}
 			}
-
 			this.words = newList;
 		}
-	
 	}
-
 
 	/**
 	 * 
@@ -182,7 +160,6 @@ public class Hangman{
 			emptyWord.add((char) '_');
 		}
 	}
-
 
 	/**
 	 * generateNewWord method allows us to randomly generate a letter of length n, determined by player
@@ -199,15 +176,12 @@ public class Hangman{
 		targetWord = randomWord;
 	}
 
-
-
 	/**
 	 * offerHint method allows us to return cross-word style hint associated with given word in wordTable map
 	 **/
 	public void offerHint(){
-		System.out.println(wordTable.get(targetWord));
+		System.out.println("Hint: "+wordTable.get(targetWord));
 	}
-
 
 	public ArrayList<Integer> checkForLetter(char letter){
 
@@ -222,7 +196,6 @@ public class Hangman{
 		}
 		return indices;
 	}
-
 
 	/**
 	 * 
@@ -243,8 +216,7 @@ public class Hangman{
 	 	return radixTree.findWordsWPrefix(prefix);
 	}
 
-
-
+	// Visual for hangman game for different numIncorrectGuesses //
 	public void hangmanVisual(){
 
 		if (numIncorrectAttempts == 1){
@@ -263,8 +235,7 @@ public class Hangman{
 			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
-			System.out.println();//print out guessed letters)
-			
+			System.out.println();//print out guessed letters)	
 		}
 		else if (numIncorrectAttempts == 2){
 			System.out.println("	__________________");
@@ -284,7 +255,6 @@ public class Hangman{
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
-
 		else if (numIncorrectAttempts == 3){
 			System.out.println("	__________________");
 			System.out.println("	|           _|_");
@@ -303,7 +273,6 @@ public class Hangman{
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
-
 		else if (numIncorrectAttempts == 4){
 			System.out.println("	__________________");
 			System.out.println("	|           _|_");
@@ -322,7 +291,6 @@ public class Hangman{
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}		
-
 		else if (numIncorrectAttempts == 5){
 			System.out.println("	__________________");
 			System.out.println("	|           _|_");
@@ -341,7 +309,6 @@ public class Hangman{
 			System.out.println();//print out array of letter space for correct word guess)
 			System.out.println();//print out guessed letters)
 		}
-
 		else if (numIncorrectAttempts == 6){
 			System.out.println("	__________________");
 			System.out.println("	|           _|_");
@@ -412,8 +379,7 @@ public class Hangman{
 			System.out.println("    ____|____");
 			System.out.println();
 			System.out.println();//print out array of letter space for correct word guess)
-			System.out.println();//print out guessed letters)
-			
+			System.out.println();//print out guessed letters)	
 		}
 		else if (numIncorrectAttempts == 10){
 			System.out.println("	__________________");
